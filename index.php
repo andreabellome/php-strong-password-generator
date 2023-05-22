@@ -16,7 +16,7 @@ $lunghezzaPassword = intval($lunghezzaPassword);
 
 /* generare la password in base alla lunghezza e alle ripetizioni */
 function generateRandomString($lunghezzaPassword, $ripetizioni) {
-    $alphabet = range('a', 'z');
+    $alphabet = array_merge(range('A', 'Z'), range('a', 'z'));
 
     if ($ripetizioni == '1'){ /* allow repetitions */
 
