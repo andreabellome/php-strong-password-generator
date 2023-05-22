@@ -19,7 +19,7 @@ function generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpt
                 $alphabet = array_merge($alphabet, $symbols);
             }
             
-        }  
+        }
 
     } else { /* please check at least one box --> default is lower and upper case letters */
         $alphabet = array_merge(range('A', 'Z'), range('a', 'z'));
@@ -46,6 +46,5 @@ function generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpt
     return $randomString;
 }
 /* end: generare la password in base alla lunghezza e alle ripetizioni */
-
 
 ?>
