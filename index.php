@@ -73,9 +73,8 @@ function generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpt
 }
 /* end: generare la password in base alla lunghezza e alle ripetizioni */
 
+/* call the function */
 generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpts);
-
-var_dump(generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpts));
 
 ?>
 
@@ -98,44 +97,44 @@ var_dump(generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpt
 </head>
 <body>
     
-    <div class="container align-it-center debug">
+    <div class="container align-it-center">
 
         <!-- start: title and subtitle -->
-        <h1 class="debug text-center">
+        <h1 class=" text-center">
             Strong Password Generator
         </h1>
 
-        <h2 class="debug text-center">
+        <h2 class=" text-center">
             Genera una password sicura
         </h2>
         <!-- end: title and subtitle -->
 
         
         <!-- start: form -->
-        <form action="index.php" method="GET" class="debug flex flex-dir-row just-cont-evenly flex-wrap">
+        <form action="index.php" method="GET" class=" flex flex-dir-row just-cont-evenly flex-wrap">
 
-            <div class="debug padd-5" style=" width: 70% ">
+            <div class=" padd-5" style=" width: 65% ">
                 <span>
                     Lunghezza password:
                 </span>
             </div>
 
-            <div class="debug padd-5" style=" width: 30% ">
+            <div class=" padd-5" style=" width: 35% ">
                 <input type="number" name="lunghezzaPass" class="form-control" placeholder="Inserire lunghezza (default: 10)" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
 
-            <div class="debug padd-5" style=" width: 70% ">
+            <div class=" padd-5" style=" width: 65% ">
                 <span>
                     Consenti ripetizioni di uno o più caratteri:
                 </span>
             </div>
 
 
-            <div class="debug padd-5" style=" width: 30% ">
+            <div class=" padd-5" style=" width: 35% ">
 
                 <!-- start: radio buttons -->
-                <div class="debug">
+                <div class="mb-3">
                     <input type="radio" id="option1" name="options" value="1">
                     <label for="option1">Si</label>
 
@@ -146,7 +145,7 @@ var_dump(generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpt
                 </div>
                 <!-- end: radio buttons -->
 
-                <div class="debug">
+                <div class="">
                     <label>
                         <input type="checkbox" name="passoption[]" value="lettere" checked> Lettere
                     </label> <br>
@@ -161,7 +160,7 @@ var_dump(generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpt
             </div>
 
             <!-- start: buttons -->
-            <div class="debug padd-5" style="width: 100%">
+            <div class=" padd-5" style="width: 100%">
 
                 <button type="submit" class="btn btn-primary mr-5">Invia</button>
                 <button type="submit" class="btn btn-secondary">Annulla</button>
