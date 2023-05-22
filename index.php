@@ -1,6 +1,42 @@
 <?php
 
+$lunghezzaPassword = $_GET['lunghezzaPass'];
+$ripetizioni = $_GET['options'];
 
+if (empty($lunghezzaPassword)) {
+    $lunghezzaPassword = '10';
+}
+
+if (empty($ripetizioni)) {
+    $ripetizioni = '1';
+}
+
+/* get integer number */
+$lunghezzaPassword = intval($lunghezzaPassword);
+
+/* generare la password in base alla lunghezza e alle ripetizioni */
+function generateRandomString($lunghezzaPassword, $ripetizioni) {
+    $alphabet = range('a', 'z');
+
+    if ($ripetizioni == '1'){ /* allow repetitions */
+
+        $randomString = '';
+        for ($i = 0; $i < $lunghezzaPassword; $i++) {
+            $randomKey = array_rand($alphabet);
+            $randomString .= $alphabet[$randomKey];
+        }
+
+    } else { /* do not allow repetitions */
+        
+        shuffle($alphabet);
+        $randomString = implode('', array_slice($alphabet, 0, $lunghezzaPassword));
+        
+    }
+
+    return $randomString;
+}
+
+var_dump(generateRandomString($lunghezzaPassword, $ripetizioni));
 
 ?>
 
@@ -46,13 +82,13 @@
             </div>
 
             <div class="debug padd-5" style=" width: 30% ">
-                <input type="number" class="form-control" placeholder="Inserire lunghezza (ad es. 10)" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="number" name="lunghezzaPass" class="form-control" placeholder="Inserire lunghezza (ad es. 10)" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
 
             <div class="debug padd-5" style=" width: 70% ">
                 <span>
-                    Consenti ripetizionidi uno o più caratteri:
+                    Consenti ripetizioni di uno o più caratteri:
                 </span>
             </div>
 
@@ -61,12 +97,12 @@
 
                 <!-- start: radio buttons -->
                 <div class="debug">
-                    <input type="radio" id="option1" name="options" value="1" checked>
+                    <input type="radio" id="option1" name="options" value="1">
                     <label for="option1">Si</label>
 
                     <br>
                     
-                    <input type="radio" id="option2" name="options" value="2">
+                    <input type="radio" id="option2" name="options" value="2" checked>
                     <label for="option2">No</label>
                 </div>
                 <!-- end: radio buttons -->
