@@ -3,6 +3,18 @@
 $lunghezzaPassword = $_GET['lunghezzaPass'];
 $ripetizioni = $_GET['options'];
 
+$selectedPassOpts = $_GET['passoption'];
+
+/* if (isset($_GET['passoption'])) {
+    $passOpts = $_GET['passoption'];
+    foreach ($passOpts as $opt) {
+      var_dump($opt);
+    }
+  } else {
+    echo "No fruits selected.";
+} */
+
+
 if (empty($lunghezzaPassword)) {
     $lunghezzaPassword = '10';
 }
@@ -14,11 +26,34 @@ if (empty($ripetizioni)) {
 /* get integer number */
 $lunghezzaPassword = intval($lunghezzaPassword);
 
-/* generare la password in base alla lunghezza e alle ripetizioni */
-function generateRandomString($lunghezzaPassword, $ripetizioni) {
-    $alphabet = array_merge(range('A', 'Z'), range('a', 'z'));
+/* start: generare la password in base alla lunghezza e alle ripetizioni */
+function generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpts) {
+    
+    /* start: extract the password options */
+    if (isset($selectedPassOpts)) {
 
-    if ($ripetizioni == '1'){ /* allow repetitions */
+        $alphabet = [];
+        foreach ( $selectedPassOpts as $opt ) {
+            
+            if ( $opt == 'lettere' ) {
+                $alphabet = array_merge($alphabet, range('A', 'Z'), range('a', 'z'));
+            } elseif ( $opt == 'numeri' ) {
+                $alphabet = array_merge($alphabet, range('0', '9'));
+            } elseif ( $opt == 'simboli' ) {
+                $symbols = range('!', '@');
+                array_splice($symbols, 15, 10);
+                $alphabet = array_merge($alphabet, $symbols);
+            }
+            
+        }  
+
+    } else { /* please check at least one box --> default is lower and upper case letters */
+        $alphabet = array_merge(range('A', 'Z'), range('a', 'z'));
+    }
+    /* end: extract the password options */
+
+    /* start: generate the password */
+    if ($ripetizioni == '1' || $lunghezzaPassword > count($alphabet) ){ /* allow repetitions */
 
         $randomString = '';
         for ($i = 0; $i < $lunghezzaPassword; $i++) {
@@ -32,11 +67,15 @@ function generateRandomString($lunghezzaPassword, $ripetizioni) {
         $randomString = implode('', array_slice($alphabet, 0, $lunghezzaPassword));
         
     }
+    /* end: generate the password */
 
     return $randomString;
 }
+/* end: generare la password in base alla lunghezza e alle ripetizioni */
 
-var_dump(generateRandomString($lunghezzaPassword, $ripetizioni));
+generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpts);
+
+var_dump(generateRandomString($lunghezzaPassword, $ripetizioni, $selectedPassOpts));
 
 ?>
 
@@ -82,7 +121,7 @@ var_dump(generateRandomString($lunghezzaPassword, $ripetizioni));
             </div>
 
             <div class="debug padd-5" style=" width: 30% ">
-                <input type="number" name="lunghezzaPass" class="form-control" placeholder="Inserire lunghezza (ad es. 10)" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="number" name="lunghezzaPass" class="form-control" placeholder="Inserire lunghezza (default: 10)" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
 
@@ -106,6 +145,18 @@ var_dump(generateRandomString($lunghezzaPassword, $ripetizioni));
                     <label for="option2">No</label>
                 </div>
                 <!-- end: radio buttons -->
+
+                <div class="debug">
+                    <label>
+                        <input type="checkbox" name="passoption[]" value="lettere" checked> Lettere
+                    </label> <br>
+                    <label>
+                        <input type="checkbox" name="passoption[]" value="numeri"> Numeri
+                    </label> <br>
+                    <label>
+                        <input type="checkbox" name="passoption[]" value="simboli"> Simboli
+                    </label> <br>
+                </div>
 
             </div>
 
