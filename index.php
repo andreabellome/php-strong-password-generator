@@ -1,5 +1,6 @@
 <?php
 
+/* include the functions here */
 include __DIR__ . '/assets/functions/functions.php';
 
 /* start: input */
